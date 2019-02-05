@@ -18,9 +18,26 @@ class MainController extends Controller
         {
             $domain=env('APP_URL');
             $links = new Links();
-            $result = $links->AlreadyHaveURL($_POST["shorten_url"]);
-            if (!$result) $result = $links->SaveURL($_POST["shorten_url"]);
-            return $domain.$result;
+            $result['link'] = $links->AlreadyHaveURL($_POST["shorten_url"]);
+            $result['have'] = true;
+            if (!$result['link']) {
+                $result['link'] = $links->SaveURL($_POST["shorten_url"]);
+                $result['have'] = false;
+            }
+            $result['link']=$domain.$result['link'];
+            return $result;
+        }
+    }
+
+    public function redirect($link)
+    {
+        $links = new Links();
+        $result = $links->GetRedirectTo($link);
+        if ($result){
+            return redirect($result);
+        }
+        else{
+            abort(404);
         }
     }
 }

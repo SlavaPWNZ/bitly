@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
     });
 
     $(function() {
-        $( "#shorten_url" ).focus();
+        $("#shorten_url" ).focus();
     });
 
     $('#result').focus(function(){
@@ -16,8 +16,11 @@ jQuery(document).ready(function () {
 
     $(document).on('click', '#modal_button',function(){
         var shorten_url = $('#shorten_url').val();
-        var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,200}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+        var expression = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-zа-яё0-9]+([\-\.]{1}[a-zа-яё0-9]+)*\.[a-zа-яё]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
         var regex = new RegExp(expression);
+        $('.alert-danger').html('');
+        $('.alert-danger').css('display','none');
+        $('#result').val('');
         if(shorten_url.match(regex))
         {
             $('#customerModal').modal('show');
@@ -26,7 +29,12 @@ jQuery(document).ready(function () {
                 method:"POST",
                 data:{shorten_url:shorten_url},
                 success:function(data){
-                    $('#result').val(data);
+                    if (data['have']){
+                        jQuery('.alert-danger').show();
+                        jQuery('.alert-danger').append('<p>Данная ссылка была сгенерирована ранее!</p>');
+                    }
+                    $('#result').val(data['link']);
+                    document.getElementById("link").href=data['link'];
                 }
             });
         }

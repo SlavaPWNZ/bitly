@@ -34,4 +34,14 @@ class Links extends Model
         }
     }
 
+    public function GetRedirectTo($link){
+        $result=Links::where('link', $link)->first();
+        if (!empty($result)) {
+            return $result->redirect_to;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
