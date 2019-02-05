@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html >
 <head>
+    <meta name="_token" content="{{csrf_token()}}" />
     <title>Тестовое задание "укорачиватель ссылок"</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -25,10 +26,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Ваша сссылка</h4>
+                        <h4 class="modal-title">Ваша сссылка:</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="title" id="title" class="form-control"/>
+                        <input type="text" name="title" id="result" class="form-control"/>
                     </div>
                 </div>
             </div>

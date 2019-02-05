@@ -9,13 +9,18 @@ class MainController extends Controller
 {
     public function index()
     {
-        if(isset($_POST["action"]))
+        return view('main');
+    }
+
+    public function store()
+    {
+        if(isset($_POST["shorten_url"]))
         {
-            if($_POST["action"] == "Load") return $this->post_load();
-            elseif($_POST["action"] == "Create") return $this->post_create();
-        }
-        else{
-            return view('main');
+            $domain=env('APP_URL');
+            $links = new Links();
+            $result = $links->AlreadyHaveURL($_POST["shorten_url"]);
+            if (!$result) $result = $links->SaveURL($_POST["shorten_url"]);
+            return $domain.$result;
         }
     }
 }
