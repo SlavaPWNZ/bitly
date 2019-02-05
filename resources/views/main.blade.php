@@ -30,7 +30,7 @@
                     </div>
                     <div class="modal-body">
                         <input type="text" name="title" id="result" class="form-control"/><br>
-                        <a id="link" href="" target="_blank"><input type="button" id="modal_button" class="btn btn-info" value="Перейти"></a>
+                        <a id="link" href="" target="_blank"><input type="button" class="btn btn-info" value="Перейти"></a>
                     </div>
                     <div class="alert alert-danger" style="display:none"></div>
                 </div>
